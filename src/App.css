@@ -1,0 +1,70 @@
+
+*{
+  font-family: 'Arial', sans-serif;
+  font-size: calc(10px + 2vmin);
+  background-color: #282c34;
+}
+
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+}
+
+.page-main-content {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: top;
+  color: white;
+  text-align: center;
+  margin: 1%;
+}
+
+.button-new-item {
+  background-color: #1f87d1;
+  color: #FFF;
+  border: none;
+  border-radius: 3px;
+  float: right;
+}
+
+.search {
+  background-color: #FFF;
+  margin-right: 10px;
+  width: 80%;
+  float: left;
+}
+
+.filtering-tools {
+  width: 90%;
+}
+
+table, th, td {
+  border: 1px solid #FFF;
+  border-collapse: collapse;
+}
+
+.item-results-list {
+  width: 90%;
+  margin-top: 15px;
+}
+
+th.large-cell, td.large-cell {
+  width:60%;
+}
+
+th.small-cell, td.small-cell {
+  width:20%;
+}
+
+button.incdec {
+  background-color: #1f87d1;
+  color: #FFF;
+  border: none;
+  border-radius: 3px;
+  justify-content: center;
+  font-size: calc(6px + 1.5vmin);
+  float: center;
+}
