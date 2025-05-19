@@ -1,6 +1,6 @@
 import './App.css';
 import {useState} from 'react'
-import ItemSlice from './components/ItemSlice';
+import ItemTable from './components/ItemTable.jsx';
 
 function App() {
   const [items, setItems] = useState([]);
@@ -25,20 +25,7 @@ function App() {
         <input placeholder='Search for an item' value={searchTerm} className='search' onChange={(e) => setSearchTerm(e.target.value)}/>
         <button className='button-new-item' onClick={handleNewItem}>+ New Item</button>
       </div>
-      <table className='item-results-list'>
-        <thead>
-          <tr>
-            <th className='large-cell'>Item Name</th>
-            <th className='small-cell'>Quantity</th>
-            <th className='small-cell'>+ / -</th>
-          </tr>
-        </thead>
-        <tbody>
-          {filteredItems.map((item) => (
-            <ItemSlice key={item.id} item={item} setItems={setItems}/>
-          ))}
-        </tbody>
-      </table>
+      <ItemTable filteredItems={filteredItems} items={items} setItems={setItems}/>
     </div>
   );
 }

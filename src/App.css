@@ -2,6 +2,15 @@
 *{
   font-family: 'Arial', sans-serif;
   font-size: calc(10px + 2vmin);
+}
+
+p, summary {
+  font-size: 2vmin;
+}
+
+html, body {
+  height: 100%;
+  width: 100%;
   background-color: #282c34;
 }
 
@@ -59,7 +68,7 @@ th.small-cell, td.small-cell {
   width:20%;
 }
 
-button.incdec {
+button.fl-center{
   background-color: #1f87d1;
   color: #FFF;
   border: none;
@@ -67,4 +76,64 @@ button.incdec {
   justify-content: center;
   font-size: calc(6px + 1.5vmin);
   float: center;
+  margin: 2px;
+}
+
+button.fl-right {
+  background-color: #1f87d1;
+  color: #FFF;
+  border: none;
+  border-radius: 3px;
+  justify-content: center;
+  font-size: calc(6px + 1.5vmin);
+  float: right;
+  margin: 2px;
+}
+
+button.fl-left {
+  background-color: #1f87d1;
+  color: #FFF;
+  border: none;
+  border-radius: 3px;
+  justify-content: center;
+  font-size: calc(6px + 1.5vmin);
+  float: left;
+  margin: 2px;
+}
+
+dialog.item-dialog::backdrop {
+  backdrop-filter: blur(3px);
+}
+
+dialog.item-dialog {
+  width: 40%;
+  height: 25%;
+  padding: 2%;
+}
+
+div.item-dialog {
+  display: block;
+}
+
+.left-align {
+  text-align: left;
+}
+
+.item-dialog {
+  background-color: #484c44;
+  color: #FFF;
+  justify-content: top;
+}
+
+::marker {
+  font-size: 1.5vmin;
+}
+
+::details-content {
+  margin-left: 15px;
+}
+
+div.bottom-buttons {
+  position: absolute;
+  bottom: 5%;
 }
