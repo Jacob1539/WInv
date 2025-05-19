@@ -1,7 +1,6 @@
 import ItemSlice from './ItemSlice';
 
 export default function ItemTable({filteredItems, setItems}) {
-    console.log(filteredItems);
     return (
         <table className='item-results-list'>
             <thead>

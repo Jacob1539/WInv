@@ -68,7 +68,7 @@ th.small-cell, td.small-cell {
   width:20%;
 }
 
-button.fl-center{
+button.fl-center, input.fl-center{
   background-color: #1f87d1;
   color: #FFF;
   border: none;
@@ -79,7 +79,7 @@ button.fl-center{
   margin: 2px;
 }
 
-button.fl-right {
+button.fl-right, input.fl-right {
   background-color: #1f87d1;
   color: #FFF;
   border: none;
@@ -90,7 +90,7 @@ button.fl-right {
   margin: 2px;
 }
 
-button.fl-left {
+button.fl-left, input.fl-left {
   background-color: #1f87d1;
   color: #FFF;
   border: none;
@@ -101,7 +101,7 @@ button.fl-left {
   margin: 2px;
 }
 
-dialog.item-dialog::backdrop {
+dialog::backdrop {
   backdrop-filter: blur(3px);
 }
 
@@ -136,4 +136,20 @@ div.item-dialog {
 div.bottom-buttons {
   position: absolute;
   bottom: 5%;
+}
+
+table.item-form, tr.item-form {
+  width: 100%;
+  border-style: hidden;
+}
+
+input.item-form {
+  float: right;
+  width: 40%;
+  border-radius: 8px;
+  border: none;
+}
+
+label {
+  float: left;
 }
