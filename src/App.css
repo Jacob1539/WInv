@@ -1,7 +1,8 @@
+/*Global & text*/
 
 *{
   font-family: 'Arial', sans-serif;
-  font-size: calc(10px + 2vmin);
+  font-size: calc(12px + 1.2vmin);
 }
 
 h1 {
@@ -9,24 +10,24 @@ h1 {
   margin-bottom: -10px;
 }
 
-h3 {
-  font-size: calc(4px + 2vmin);
-  font-weight: normal;
+h2 {
+  font-size: calc(14px + 3vmin);
 }
 
-p, summary {
-  font-size: 2vmin;
+::details-content {
+  margin-left: 15px;
 }
+
+.left-align {
+  text-align: left;
+}
+
+/*Main page content*/
 
 html, body {
   height: 100%;
   width: 100%;
   background-color: #2b2b2b;
-}
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
 }
 
 .page-main-content {
@@ -38,124 +39,26 @@ html, body {
   justify-content: top;
   color: white;
   text-align: center;
-  margin: 1%;
+  margin-top: 1%;
+  margin-bottom: 1%;
+  margin-left: 5%;
+  margin-right: 5%;
 }
 
-button {
-  background-color: #1f87d1;
-}
+/*Divs*/
 
-.button-new-item {
-  color: #FFF;
-  border: none;
-  border-radius: 3px;
-  float: right;
-}
-
-.search {
-  background-color: #FFF;
-  margin-right: 10px;
-  width: 80%;
-  float: left;
-}
-
-.quickadd-search {
-  background-color: #FFF;
+div.flex-h {
   width: 100%;
-  float: center;
-  border: none;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap
 }
 
-.filtering-tools {
-  width: 90%;
-}
-
-table, th, td {
-  border: 1px solid #FFF;
-  border-collapse: collapse;
-}
-
-table {
-  margin-bottom: 10px;
-}
-
-.item-results-list {
-  width: 90%;
-  margin-top: 15px;
-}
-
-th.large-cell, td.large-cell {
-  width:60%;
-}
-
-th.small-cell, td.small-cell {
-  width:20%;
-}
-
-.red {
-  background-color: #d15e56;
-}
-
-button.fl-center, input.fl-center{
-  color: #FFF;
-  border: none;
-  border-radius: 3px;
-  justify-content: center;
-  font-size: calc(6px + 1.5vmin);
-  float: center;
-  margin: 2px;
-}
-
-button.fl-right, input.fl-right {
-  color: #FFF;
-  border: none;
-  border-radius: 3px;
-  justify-content: center;
-  font-size: calc(6px + 1.5vmin);
-  float: right;
-  margin: 2px;
-}
-
-button.fl-left, input.fl-left {
-  color: #FFF;
-  border: none;
-  border-radius: 3px;
-  justify-content: center;
-  font-size: calc(6px + 1.5vmin);
-  float: left;
-  margin: 2px;
-}
-
-dialog::backdrop {
-  backdrop-filter: blur(3px);
-}
-
-dialog.item-dialog {
-  width: 40%;
-  height: 40%;
-  padding: 2%;
-}
-
-div.item-dialog {
-  display: block;
-}
-
-.left-align {
-  text-align: left;
-}
-
-.item-dialog {
-  background-color: #404040;
-  color: #FFF;
-  justify-content: top;
-}
-
-::marker {
-  font-size: 1.5vmin;
-}
-
-::details-content {
-  margin-left: 15px;
+div.flex-v {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
 }
 
 div.bottom-buttons {
@@ -163,9 +66,61 @@ div.bottom-buttons {
   bottom: 5%;
 }
 
-table.item-form, tr.item-form {
-  width: 100%;
-  border-style: hidden;
+div.item-dialog {
+  display: block;
+}
+
+/*Buttons, Inputs, & Forms*/
+
+input {
+  min-height: 35px;
+}
+
+button {
+  background-color: #1f87d1;
+  min-height: 35px;
+  color: #FFF;
+  border: none;
+  border-radius: 3px;
+  justify-content: center;
+}
+
+.button-new-item {
+  margin-left: 10px;
+  float: right;
+  order: 3;
+  flex: 18%;
+}
+
+button.clear {
+  background-color: #717882;
+  order: 2;
+  margin-left: 10px;
+  flex: 5%;
+}
+
+.search {
+  background-color: #FFF;
+  float: left;
+  order: 1;
+  flex: 77%;
+  border: none;
+  border-radius: 3px;
+}
+
+button.fl-center, input.fl-center{
+  float: center;
+  margin: 2px;
+}
+
+button.fl-right, input.fl-right {
+  float: right;
+  margin: 2px;
+}
+
+button.fl-left, input.fl-left {
+  float: left;
+  margin: 2px;
 }
 
 input.item-form {
@@ -180,7 +135,12 @@ label {
   float: left;
 }
 
+button.red {
+  background-color: #d15e56;
+}
+
 /*Navbar*/
+
 li.navbar{
   float:left;
 }
@@ -196,6 +156,7 @@ li a{
 
 li a:hover{
   background-color: #000;
+  color: #FFF;
 }
 
 ul.unavbar{
@@ -210,3 +171,55 @@ ul.unavbar{
   background-color: #fff;
   color:#282828;
 }
+
+/*Tables*/
+
+table, th, td {
+  border: 1px solid #FFF;
+  border-collapse: collapse;
+  height: 35px;
+}
+
+table {
+  margin-bottom: 10px;
+  margin-top: 20px;
+  width: 100%;
+}
+
+th.small-cell, td.small-cell, .small-cell {
+  width:20%;
+}
+
+table.item-form, tr.item-form {
+  width: 100%;
+  border-style: hidden;
+}
+
+/*Dialogs*/
+
+dialog::backdrop {
+  backdrop-filter: blur(3px);
+}
+
+@media only screen and (min-width: 601px) {
+  dialog.item-dialog {
+    width: 55%;
+    height: 55%;
+    padding: 2%;
+  }
+}
+
+@media only screen and (max-width: 600px) {
+  dialog.item-dialog {
+    width: 75%;
+    height: 75%;
+    padding: 2%;
+  }
+}
+
+.item-dialog {
+  background-color: #404040;
+  color: #FFF;
+  justify-content: top;
+}
+

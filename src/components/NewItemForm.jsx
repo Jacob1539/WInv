@@ -5,7 +5,7 @@ import {db} from '../config/firestore.js'
 export default function NewItemForm({items, setItems, handleDialogClose, startName}) {
     const [itemName, setItemName] = useState(typeof startName === typeof undefined ? '' : startName);
     const [itemQuantity, setItemQuantity] = useState(0);
-    const [itemPrice, setItemPrice] = useState(0);
+    const [itemPrice, setItemPrice] = useState('');
     const form = document.getElementById('new-item-form');
 
     //Update startName whenever it changes, if this is an instance of NewItemForm where startName is defined

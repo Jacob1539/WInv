@@ -6,8 +6,13 @@ import Navbar from '../components/Navbar.jsx';
 
 export default function QuickAdd({items, setItems}) {
   const [itemName, setItemName] = useState('');
-
+  const searchBar = document.getElementById('search-bar');
   const filteredItems = items.filter(item => item.name.toLowerCase().includes(itemName.toLowerCase()));
+
+  const clearSearch = () => {
+    setItemName('');
+    searchBar.value = '';
+  }
 
   var quickAddComponent;
   if (filteredItems.length > 0) {
@@ -25,9 +30,10 @@ export default function QuickAdd({items, setItems}) {
       <Navbar/>
       <div className='page-main-content'>
         <h1>Quick Add</h1>
-        <div className='filtering-tools'>
-          <h3>Type the full name of a product in the area below. If the product is already in the inventory, options to increase the quantity will appear. If the product is not in the inventory, options to add a new item will appear.</h3>
-          <input placeholder='Enter Item Name' value={itemName} className='quickadd-search' onChange={(e) => setItemName(e.target.value)}/>
+        <p>Type the full name of a product in the area below. If the product is already in the inventory, options to increase the quantity will appear. If the product is not in the inventory, options to add a new item will appear.</p>
+        <div className='flex-h'>
+          <input placeholder='Enter Item Name' id='search-bar' value={itemName} className='search' onChange={(e) => setItemName(e.target.value)}/>
+          <button onClick={clearSearch} className='clear'>Clear</button>
         </div>
         {quickAddComponent}
       </div>

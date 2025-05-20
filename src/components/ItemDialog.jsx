@@ -1,16 +1,14 @@
-import {useRef} from 'react';
 import {doc, getDoc, updateDoc, deleteDoc} from 'firebase/firestore';
 import {db} from '../config/firestore.js';
 
-export default function ItemDialog({item, setItems}) {
-    const dialogRef = useRef(null);
-
-    const handleDialogOpen = () => {
-        dialogRef.current.showModal();
-    }
-
-    const handleDialogClose = () => {
-        dialogRef.current.close();
+export default function ItemDialog({item, setItems, handleDialogClose}) {
+    //Prevent errors from items being deleted and not reflected client side
+    const preventDeletionError = (docSnap) => {
+        if (typeof docSnap.data() === typeof undefined) {
+            //This item has been removed from the inventory since the page was last updated
+            alert("Error: This item could not be found in the inventory. The page will now refresh to download the most recent updates to the inventory.");
+            window.location.reload();
+        }
     }
 
     //Note: for synchronization across devices, increment and decrement will increment the quantity stored in the database rather than the quantity shown on the client side
@@ -27,6 +25,7 @@ export default function ItemDialog({item, setItems}) {
     const decrement = async () => {
         const docRef = doc(db, "inventory", item.id);
         const docSnap = await getDoc(docRef);
+        preventDeletionError(docSnap);
         const initialQty = parseInt(docSnap.data().quantity); //get db quantity
         const decQty = initialQty - 1;
         if (decQty < 0) {
@@ -50,6 +49,7 @@ export default function ItemDialog({item, setItems}) {
 
     const setPrice = async () => {
         const docRef = doc(db, "inventory", item.id);
+        preventDeletionError(docRef);
         const newPrice = prompt("Enter new price for " + item.name);
         if (isNaN(parseFloat(newPrice)) || newPrice < 0) {
             alert("Invalid price.");
@@ -66,28 +66,25 @@ export default function ItemDialog({item, setItems}) {
 
     return (
         <>
-            <button className='fl-center' onClick={handleDialogOpen}>Manage</button>
-            <dialog ref={dialogRef} className='item-dialog'>
-                <div className='item-dialog'>
-                    <button className='fl-right' onClick={handleDialogClose}>X</button>
-                </div>
-                <div className='left-align'>
-                    <h2>{item.name}</h2>
-                    <p>Quantity: {item.quantity}</p>
-                    <p>Price: {isNaN(parseFloat(item.price)) ? "Unknown" : "$" + item.price}</p>
-                    <details>
-                        <summary>Advanced</summary>
-                        <p>ID: {item.id}</p>
-                    </details>
-                </div>
-                <div className='bottom-buttons'>
-                    <button className='fl-left' onClick={decrement}>Subtract 1</button>
-                    <button className='fl-left' onClick={increment}>Add 1</button>
-                    <button className='fl-left' onClick={setQuantity}>Update Quantity</button>
-                    <button className='fl-left' onClick={setPrice}>Update Price</button>
-                    <button className='red fl-left' onClick={remove}>Remove Item</button>
-                </div>
-            </dialog>
+            <div className='item-dialog'>
+                <button className='fl-right' onClick={handleDialogClose}>X</button>
+            </div>
+            <div className='left-align'>
+                <h2>{item.name}</h2>
+                <p>Quantity: {item.quantity}</p>
+                <p>Price: {isNaN(parseFloat(item.price)) ? "Unknown" : "$" + item.price}</p>
+                <details>
+                    <summary>Advanced</summary>
+                    <p>ID: {item.id}</p>
+                </details>
+            </div>
+            <div className='bottom-buttons'>
+                <button className='fl-left' onClick={decrement}>Remove 1</button>
+                <button className='fl-left' onClick={increment}>Add 1</button>
+                <button className='fl-left' onClick={setQuantity}>Update Quantity</button>
+                <button className='fl-left' onClick={setPrice}>Update Price</button>
+                <button className='red fl-left' onClick={remove}>Remove Item</button>
+            </div>
         </>
     )
 }

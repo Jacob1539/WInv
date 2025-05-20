@@ -25,6 +25,12 @@ export default function InventoryStatistics({items}) {
         unitsInInv += qty;
     })
 
+    //Make disclaimer about items without price visible only if there are items without a defined price
+    var noPriceDisclaimer = '';
+    if (itemsWithoutPrice > 0) {
+        noPriceDisclaimer = <p>Inventory value excludes {itemsWithoutPrice} items ({unitsWithoutPrice} units) without a defined price.</p>
+    }
+
     return (
         <>
             <button className='fl-center' onClick={handleDialogOpen}>View Inventory Statistics</button>
@@ -37,7 +43,7 @@ export default function InventoryStatistics({items}) {
                     <p>Items in inventory: {itemsInInv}</p>
                     <p>Units in inventory: {unitsInInv}</p>
                     <p>Value of inventory: ${totalCost}</p>
-                    <p>Inventory value excludes {itemsWithoutPrice} items ({unitsWithoutPrice} units) without a defined price.</p>
+                    {noPriceDisclaimer}
                 </div>
             </dialog>
         </>
