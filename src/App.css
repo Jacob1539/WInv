@@ -4,6 +4,16 @@
   font-size: calc(10px + 2vmin);
 }
 
+h1 {
+  font-size: calc(50px + 3vmin);
+  margin-bottom: -10px;
+}
+
+h3 {
+  font-size: calc(4px + 2vmin);
+  font-weight: normal;
+}
+
 p, summary {
   font-size: 2vmin;
 }
@@ -11,7 +21,7 @@ p, summary {
 html, body {
   height: 100%;
   width: 100%;
-  background-color: #282c34;
+  background-color: #2b2b2b;
 }
 
 .App-logo {
@@ -20,7 +30,7 @@ html, body {
 }
 
 .page-main-content {
-  background-color: #282c34;
+  background-color: #2b2b2b;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
@@ -47,6 +57,13 @@ button {
   margin-right: 10px;
   width: 80%;
   float: left;
+}
+
+.quickadd-search {
+  background-color: #FFF;
+  width: 100%;
+  float: center;
+  border: none;
 }
 
 .filtering-tools {
@@ -115,7 +132,7 @@ dialog::backdrop {
 
 dialog.item-dialog {
   width: 40%;
-  height: 25%;
+  height: 40%;
   padding: 2%;
 }
 
@@ -128,7 +145,7 @@ div.item-dialog {
 }
 
 .item-dialog {
-  background-color: #484c44;
+  background-color: #404040;
   color: #FFF;
   justify-content: top;
 }
@@ -153,11 +170,43 @@ table.item-form, tr.item-form {
 
 input.item-form {
   float: right;
-  width: 40%;
+  width: stretch;
   border-radius: 8px;
+  margin-bottom: 20px;
   border: none;
 }
 
 label {
   float: left;
+}
+
+/*Navbar*/
+li.navbar{
+  float:left;
+}
+
+li a{
+  padding:14px 16px;
+  display:block;
+  color: #fff;
+  text-align: center;
+  text-decoration: none;
+  font-size: 20px;
+}
+
+li a:hover{
+  background-color: #000;
+}
+
+ul.unavbar{
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow:hidden;
+  background-color: #101010;
+}
+
+.active{
+  background-color: #fff;
+  color:#282828;
 }

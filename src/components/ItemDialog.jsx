@@ -41,7 +41,7 @@ export default function ItemDialog({item, setItems}) {
         const docRef = doc(db, "inventory", item.id);
         const newQty = prompt("Enter new quantity for " + item.name);
         if (isNaN(parseInt(newQty)) || newQty < 0) {
-            alert("Error: Cannot decrement quantity past 0.");
+            alert("Error updating quantity.");
         } else {
             updateDoc(docRef, {quantity:newQty}); //update db quantity
             setItems(items => items.map(i => i.id === item.id ? {...i, quantity: parseInt(newQty)} : i));
