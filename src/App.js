@@ -4,6 +4,7 @@ import ItemTable from './components/ItemTable.jsx';
 import NewItemButton from './components/NewItemButton.jsx';
 import {collection, getDocs} from 'firebase/firestore';
 import {db} from './config/firestore.js';
+import InventoryStatistics from './components/InventoryStatistics.jsx';
 
 function App() {
   const [items, setItems] = useState([]);
@@ -30,6 +31,7 @@ function App() {
         <NewItemButton items={items} setItems={setItems}/>
       </div>
       <ItemTable filteredItems={filteredItems} items={items} setItems={setItems}/>
+      <InventoryStatistics items={items}/>
     </div>
   );
 }

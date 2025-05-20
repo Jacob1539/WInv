@@ -31,8 +31,11 @@ html, body {
   margin: 1%;
 }
 
-.button-new-item {
+button {
   background-color: #1f87d1;
+}
+
+.button-new-item {
   color: #FFF;
   border: none;
   border-radius: 3px;
@@ -55,6 +58,10 @@ table, th, td {
   border-collapse: collapse;
 }
 
+table {
+  margin-bottom: 10px;
+}
+
 .item-results-list {
   width: 90%;
   margin-top: 15px;
@@ -68,8 +75,11 @@ th.small-cell, td.small-cell {
   width:20%;
 }
 
+.red {
+  background-color: #d15e56;
+}
+
 button.fl-center, input.fl-center{
-  background-color: #1f87d1;
   color: #FFF;
   border: none;
   border-radius: 3px;
@@ -80,7 +90,6 @@ button.fl-center, input.fl-center{
 }
 
 button.fl-right, input.fl-right {
-  background-color: #1f87d1;
   color: #FFF;
   border: none;
   border-radius: 3px;
@@ -91,7 +100,6 @@ button.fl-right, input.fl-right {
 }
 
 button.fl-left, input.fl-left {
-  background-color: #1f87d1;
   color: #FFF;
   border: none;
   border-radius: 3px;

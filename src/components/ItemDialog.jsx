@@ -1,5 +1,5 @@
 import {useRef} from 'react';
-import {doc, getDoc, updateDoc} from 'firebase/firestore';
+import {doc, getDoc, updateDoc, deleteDoc} from 'firebase/firestore';
 import {db} from '../config/firestore.js';
 
 export default function ItemDialog({item, setItems}) {
@@ -59,6 +59,11 @@ export default function ItemDialog({item, setItems}) {
         }
     }
 
+    const remove = async () => {
+        await deleteDoc(doc(db, "inventory", item.id));
+        setItems(items => items.filter(i => i.id !== item.id));
+    }
+
     return (
         <>
             <button className='fl-center' onClick={handleDialogOpen}>Manage</button>
@@ -80,6 +85,7 @@ export default function ItemDialog({item, setItems}) {
                     <button className='fl-left' onClick={increment}>Add 1</button>
                     <button className='fl-left' onClick={setQuantity}>Update Quantity</button>
                     <button className='fl-left' onClick={setPrice}>Update Price</button>
+                    <button className='red fl-left' onClick={remove}>Remove Item</button>
                 </div>
             </dialog>
         </>
