@@ -2,24 +2,25 @@ import './App.css';
 import {HashRouter, Routes, Route} from 'react-router-dom';
 import {useEffect, useState} from 'react';
 import {db} from './config/firestore.js';
-import {collection, getDocs} from 'firebase/firestore'
+import {collection, onSnapshot} from 'firebase/firestore'
 import Home from './pages/Home.jsx';
 import QuickAdd from './pages/QuickAdd.jsx';
 
 export default function App() {
   const [items, setItems] = useState([]);
 
-  //Read data from database upon initial page load
-      useEffect(() => {
-      getData();
-      //eslint-disable-next-line
-      }, [])
-  
-      const getData = async () => {
-      const querySnapshot = await getDocs(collection(db, "inventory"));
-      const data = querySnapshot.docs.map(doc => ({id: doc.id, ...doc.data()}));
-      setItems(data);
-      }
+  //Real time listeners
+  useEffect(() => {
+    const unsub = onSnapshot(collection(db, "inventory"), (snapshot) => {
+      const itemList = snapshot.docs.map(doc => ({
+        id: doc.id,
+        ...doc.data()
+      }))
+      setItems(itemList);
+    })
+
+    return () => unsub();
+  }, [])
   
   return(
     <HashRouter>

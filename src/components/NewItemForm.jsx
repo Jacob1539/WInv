@@ -3,7 +3,7 @@ import {collection, addDoc} from 'firebase/firestore';
 import {db} from '../config/firestore.js'
 
 export default function NewItemForm({items, setItems, handleDialogClose, startName}) {
-    const [itemName, setItemName] = useState(typeof startName === typeof undefined ? '' : startName);
+    const [itemName, setItemName] = useState(startName);
     const [itemQuantity, setItemQuantity] = useState(0);
     const [itemPrice, setItemPrice] = useState('');
     const form = document.getElementById('new-item-form');
@@ -38,6 +38,7 @@ export default function NewItemForm({items, setItems, handleDialogClose, startNa
         } else {
             alert('An error has occured while adding the new item to the inventory.');
         }
+        setItemName('');
         form.reset();
     }
 

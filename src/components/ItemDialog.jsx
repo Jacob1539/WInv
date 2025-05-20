@@ -1,73 +1,31 @@
 import {doc, getDoc, updateDoc, deleteDoc} from 'firebase/firestore';
 import {db} from '../config/firestore.js';
+import IncrementButton from './IncrementButton.jsx';
+import SetQuantityButton from './SetQuantityButton.jsx';
+import SetPriceButton from './SetPriceButton.jsx';
 
 export default function ItemDialog({item, setItems, handleDialogClose}) {
-    //Prevent errors from items being deleted and not reflected client side
-    const preventDeletionError = (docSnap) => {
-        if (typeof docSnap.data() === typeof undefined) {
-            //This item has been removed from the inventory since the page was last updated
-            alert("Error: This item could not be found in the inventory. The page will now refresh to download the most recent updates to the inventory.");
-            window.location.reload();
-        }
-    }
-
-    //Note: for synchronization across devices, increment and decrement will increment the quantity stored in the database rather than the quantity shown on the client side
-    const increment = async () => {
-        const docRef = doc(db, "inventory", item.id);
-        const docSnap = await getDoc(docRef);
-        const initialQty = parseInt(docSnap.data().quantity); //get db quantity
-        const incQty = initialQty + 1;
-        updateDoc(docRef, {quantity:incQty}); //update db quantity
-        setItems(items => items.map(i => i.id === item.id ? {...i, quantity: incQty} : i));
-    }
-
     //Note: for synchronization across devices, increment and decrement will increment the quantity stored in the database rather than the quantity shown on the client side
     const decrement = async () => {
         const docRef = doc(db, "inventory", item.id);
         const docSnap = await getDoc(docRef);
-        preventDeletionError(docSnap);
         const initialQty = parseInt(docSnap.data().quantity); //get db quantity
         const decQty = initialQty - 1;
         if (decQty < 0) {
             alert("Error: Cannot decrement quantity past 0.");
         } else {
             updateDoc(docRef, {quantity:decQty}); //update db quantity
-            setItems(items => items.map(i => i.id === item.id ? {...i, quantity: decQty} : i));
-        }
-    }
-
-    const setQuantity = async () => {
-        const docRef = doc(db, "inventory", item.id);
-        const newQty = prompt("Enter new quantity for " + item.name);
-        if (isNaN(parseInt(newQty)) || newQty < 0) {
-            alert("Error updating quantity.");
-        } else {
-            updateDoc(docRef, {quantity:newQty}); //update db quantity
-            setItems(items => items.map(i => i.id === item.id ? {...i, quantity: parseInt(newQty)} : i));
-        }
-    }
-
-    const setPrice = async () => {
-        const docRef = doc(db, "inventory", item.id);
-        preventDeletionError(docRef);
-        const newPrice = prompt("Enter new price for " + item.name);
-        if (isNaN(parseFloat(newPrice)) || newPrice < 0) {
-            alert("Invalid price.");
-        } else {
-            updateDoc(docRef, {price:newPrice}); //update db quantity
-            setItems(items => items.map(i => i.id === item.id ? {...i, price: newPrice} : i));
         }
     }
 
     const remove = async () => {
         await deleteDoc(doc(db, "inventory", item.id));
-        setItems(items => items.filter(i => i.id !== item.id));
     }
 
     return (
         <>
             <div className='item-dialog'>
-                <button className='fl-right' onClick={handleDialogClose}>X</button>
+                <button className='fl-right' onClick={() => handleDialogClose(item.id)}>X</button>
             </div>
             <div className='left-align'>
                 <h2>{item.name}</h2>
@@ -80,9 +38,9 @@ export default function ItemDialog({item, setItems, handleDialogClose}) {
             </div>
             <div className='bottom-buttons'>
                 <button className='fl-left' onClick={decrement}>Remove 1</button>
-                <button className='fl-left' onClick={increment}>Add 1</button>
-                <button className='fl-left' onClick={setQuantity}>Update Quantity</button>
-                <button className='fl-left' onClick={setPrice}>Update Price</button>
+                <IncrementButton item={item} stylePass='fl-left'/>
+                <SetQuantityButton item={item} stylePass='fl-left'/>
+                <SetPriceButton item={item} stylePass='fl-left'/>
                 <button className='red fl-left' onClick={remove}>Remove Item</button>
             </div>
         </>

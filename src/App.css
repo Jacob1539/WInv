@@ -108,17 +108,22 @@ button.clear {
   border-radius: 3px;
 }
 
-button.fl-center, input.fl-center{
+.fl-center {
   float: center;
   margin: 2px;
 }
 
-button.fl-right, input.fl-right {
+.st-center {
+  margin: 2 auto;
+  display: block;
+}
+
+.fl-right {
   float: right;
   margin: 2px;
 }
 
-button.fl-left, input.fl-left {
+.fl-left {
   float: left;
   margin: 2px;
 }
@@ -217,7 +222,23 @@ dialog::backdrop {
   }
 }
 
-.item-dialog {
+@media only screen and (min-width: 601px) {
+  dialog.mini-dialog {
+    width: 20%;
+    height: 20%;
+    padding: 2%;
+  }
+}
+
+@media only screen and (max-width: 600px) {
+  dialog.mini-dialog {
+    width: 35%;
+    height: 35%;
+    padding: 2%;
+  }
+}
+
+dialog {
   background-color: #404040;
   color: #FFF;
   justify-content: top;

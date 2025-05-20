@@ -21,6 +21,8 @@ export default function InventoryStatistics({items}) {
             unitsWithoutPrice += qty;
         } else {
             totalCost += (qty * parseFloat(element.price));
+            //fix totalCost rounding
+            totalCost = (parseFloat(totalCost)).toFixed(2);
         }
         unitsInInv += qty;
     })
